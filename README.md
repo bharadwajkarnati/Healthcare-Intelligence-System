@@ -255,7 +255,7 @@ pytest tests/ -v -m "not slow"  # Skip integration tests
 ## Design Decisions
 
 ### Why PySpark + PyTorch Hybrid Architecture?
-Medical imaging and NLP models require GPU-bound deep learning inference, which is inherently single-node. PySpark orchestrates the data pipeline, metadata, and tabular ML, while PyTorch handles the deep learning components on the driver node. This reflects production healthcare AI systems (e.g., Google Health's architecture).
+GPU-dependent deep learning workloads in medical imaging and NLP are typically executed on a single node. PySpark manages distributed data pipelines and tabular processing, while PyTorch handles deep learning inference on the driver node. This hybrid architecture reflects real-world healthcare AI system design, as seen in Google Health. (e.g., Google Health's architecture).
 
 ### Why Late Fusion over Early Fusion?
 Each data modality has different dimensionality, noise characteristics, and missingness patterns. Late fusion allows specialized models to operate on native representations, while the meta-learner adaptively weights modalities. This is also more clinically interpretable.
